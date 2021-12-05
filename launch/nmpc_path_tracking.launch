@@ -1,0 +1,16 @@
+<launch>
+    <!-- Load Omni Fake Robot -->
+    <include file="$(find omni_fake)/launch/omni_fake.launch" />
+
+    <!-- Load Path trajectory -->
+    <include file="$(find omni_path_generator)/launch/simple_path.launch" />
+
+    <!-- Load NMPC Controller -->
+    <!-- <node pkg="omni_nmpc_casadi" type="nmpc_node.py" name="nmpc_node" output="screen" /> -->
+    <node pkg="omni_nmpc_casadi" type="test_lnmpc.py" name="nmpc_node" output="screen" />
+    <!-- <node pkg="omni_nmpc_casadi" type="lnmpc_node.py" name="lnmpc_node" output="screen" /> -->
+
+    <!-- Load RViz config -->
+    <node name="rviz" pkg="rviz" type="rviz" required="true" output="screen"
+        args="-d $(find omni_nmpc_casadi)/config/config.rviz" />
+</launch>
